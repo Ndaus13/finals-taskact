@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <label for="quantity">Quantity:</label>
+        <input type="text" id="quantity" name="quantity" pattern="[0-9]+" value="0" required>
+        <button type="button" onclick="increment()">+</button>
+        <button type="button" onclick="decrement()">-</button>
+        <br>
+        <label for="shipping">Shipping and handling fee:</label>
+        <input type="text" id="shipping" name="shipping" pattern="[0-9]+(\.[0-9]{1,2})?" required>
+        <br>
+        <button type="button" onclick="calculate()">Calculate Total</button>
+      </form>
+      
+      <p id="order-summary"></p>
+      
+      <script>
+        function increment() {
+          var quantity = parseInt(document.getElementById('quantity').value);
+          document.getElementById('quantity').value = quantity + 1;
+        }
+        
+        function decrement() {
+          var quantity = parseInt(document.getElementById('quantity').value);
+          if (quantity > 0) {
+            document.getElementById('quantity').value = quantity - 1;
+          }
+        }
+        
+        function calculate() {
+          var quantity = parseInt(document.getElementById('quantity').value);
+          var shipping = parseFloat(document.getElementById('shipping').value);
+          var subtotal = quantity * 15.97;
+          var tax = subtotal * 0.1;
+          var total = subtotal + tax + shipping;
+          document.getElementById('order-summary').innerHTML = "Items: "+quantity+"<br>Shipping and handling fee: "+shipping+"<br>Total Before Tax: $" + subtotal.toFixed(2) + "<br>Estimated 10% Tax: $" + tax.toFixed(2) + "<br>Total Order: $" + total.toFixed(2);
+        }
+      </script>
+</body>
+</html>
